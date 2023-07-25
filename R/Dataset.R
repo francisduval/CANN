@@ -30,6 +30,7 @@ Dataset <-
       
       rec_class <-
         recipe(~ ., data = df1) %>%
+        step_impute_mode(sexe) %>% 
         step_other(all_nominal(), threshold = 0.05) %>%
         step_dummy(all_nominal()) %>%
         prep()

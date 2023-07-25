@@ -15,6 +15,6 @@ list(
   # Préparation des données -----------------------------------------------------------------------------------------------------
   # -----------------------------------------------------------------------------------------------------------------------------
   
-  tar_target(dbfictif_file, here("data", "dbfictif.Rda"), format = "file"),
-  tar_target(dbfictif, load(dbfictif_file))
+  tar_target(dbfictif_file, here("data", "db_fictif.csv"), format = "file"),
+  tar_target(dbfictif, read_csv(dbfictif_file))
 )

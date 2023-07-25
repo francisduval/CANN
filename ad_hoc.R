@@ -1,7 +1,7 @@
-load("data/dbfictif.Rda")
+dbfictif <- tar_read(dbfictif)
 
-data1 <- db.fictif[1:4000,]
-data2 <- db.fictif[4001:8000,]
+data1 <- dbfictif[1:4000,]
+data2 <- dbfictif[4001:8000,]
 
 ###
 
@@ -11,13 +11,12 @@ df1 <-
 
 rec_class <-
   recipe(~ ., data = df1) %>%
+  step_impute_mode(sexe) %>% 
   step_other(all_nominal(), threshold = 0.05) %>%
   step_dummy(all_nominal()) %>%
   prep()
 
 x_cols <- juice(rec_class)
-ncol(x_cols)
-x_cols <- bake(rec_class, new_data=data2)
 nombrecol <- ncol(x_cols)
 ###
 
@@ -28,8 +27,9 @@ mlp$forward(db_fictif_ds$x[1:2, ])
 
 Mod <- PoissonMLP$new(spec=PoissonMLP_1L, dataset=Dataset)
 
-Mod$train(train=data1, valid=data2, epochs=20, lr_start=0.01, factor=0.5, patience=2, batch = 64, input_size = 12, n_1L = 4)
+Mod$train(train=data1, valid=data2, epochs=20, lr_start=0.01, factor=0.5, patience=2, batch = 64, input_size = nombrecol, n_1L = 4)
 
 Mod$plot_training()
+Mod$print_metrics()
 
 db_fictif_ds$x
