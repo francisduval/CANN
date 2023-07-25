@@ -21,11 +21,21 @@ Dataset <-
     },
     
     prepare_data = function(df) {
-      y_col <- as.matrix(df$nb.sin)
-      x_cols <- 
+      
+      df1 <- 
         df %>%
-        select(expo, freq_paiement) %>%
-        as.matrix()
+        select(expo, freq_paiement, an_naissance, annee_veh, annee_permis, sexe, voiture) 
+
+      y_col <- as.matrix(df$nb.sin)
+      
+      rec_class <-
+        recipe(~ ., data = df1) %>%
+        step_other(all_nominal(), threshold = 0.05) %>%
+        step_dummy(all_nominal()) %>%
+        prep()
+      
+      x_cols <- juice(rec_class) %>% as.matrix()
+    
       
       list(
         x = torch_tensor(x_cols),
