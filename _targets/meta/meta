@@ -1,0 +1,4 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+.Random.seed|object|585ae21dbfe83ab3|||||||||||||||
+dbfictif|stem|8c56d134fa6d2233|493d4f4245c157ab|6a481211fc5dd0b6|803645426||t19562.8288626616s|ac45463db19e2cbe|48|qs|local|list|||1.696||
+dbfictif_file|stem|1d2c533b408109d1|f63714f93481adf1|4e3739ef91745af0|932492723|/Users/francisduval/Documents/Été 2023/CANN/data/dbfictif.Rda|t19562.8049602425s|81d4a9f1b34917b9|5463785|file|local|list|||0.002||
